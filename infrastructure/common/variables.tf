@@ -1,3 +1,8 @@
+variable stage {
+  description = "The stage/environment to deploy to."
+  default     = "development" // potentially have prod, staging and development
+}
+
 variable aws_access_key {
   type        = string
   description = "AWS Access Key"

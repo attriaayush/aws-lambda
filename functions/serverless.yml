@@ -6,7 +6,7 @@ service: sls-hello-world
 provider:
   name: aws
   runtime: nodejs12.x
-  region: "eu-west-1"
+  region: "eu-west-2"
   stage: ${opt:stage, "development"}
 
 functions:
@@ -16,5 +16,7 @@ functions:
       - http: ANY /
       - http: "ANY {proxy+}"
 
+# DO not need this plugin since we will be compiling before
+# the deployment step
 plugins:
   - serverless-plugin-typescript
