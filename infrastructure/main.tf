@@ -34,8 +34,7 @@ module serverless {
 
   region = "eu-west-2"
   service_name = "myfunctions"
-  stage = ${var.stage}
-
+  stage = var.stage
   # iam_region        = `*`
   # iam_partition     = `*`
   # iam_account_id    = `AWS_CALLER account`
