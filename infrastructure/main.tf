@@ -30,10 +30,9 @@ resource "aws_s3_bucket" "terraform-state-bucket" {
 }
 
 module serverless {
-  source = "FormidableLabs/serverless/aws"
+  source        = "./modules/iam"
 
-  region = "eu-west-2"
-  service_name = "myfunctions"
-  stage = var.stage
+  service_name  = "hello-world"
+  stage         = var.stage
 }
 
