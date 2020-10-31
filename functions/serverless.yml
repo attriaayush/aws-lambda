@@ -1,0 +1,15 @@
+service: my-first-serverless-app
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+functions:
+  healthz:
+    handler: ./healthz/healthz.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
+
+plugins:
+  - serverless-plugin-typescript
