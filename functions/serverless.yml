@@ -1,15 +1,20 @@
-service: my-first-serverless-app
+# Appending sls- to the service name to differentiate
+# resources created by Serverless framework vs Terraform
+
+service: sls-hello-world
 
 provider:
   name: aws
   runtime: nodejs12.x
+  region: "eu-west-1"
+  stage: ${opt:stage, "development"}
 
 functions:
   healthz:
     handler: ./healthz/healthz.handler
     events:
       - http: ANY /
-      - http: 'ANY {proxy+}'
+      - http: "ANY {proxy+}"
 
 plugins:
   - serverless-plugin-typescript
