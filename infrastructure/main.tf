@@ -33,7 +33,7 @@ module serverless {
   source = "FormidableLabs/serverless/aws"
 
   region = "eu-west-2"
-  service_name = "myapi"
+  service_name = "myfunctions"
   stage = ${var.stage}
 
   # iam_region        = `*`
