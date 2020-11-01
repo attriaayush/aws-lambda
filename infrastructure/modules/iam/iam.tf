@@ -210,6 +210,11 @@ data "aws_iam_policy_document" "developer" {
       "lambda:PublishVersion",
       "lambda:RemovePermission",
       "lambda:Update*",
+      "lambda:CreateFunction",
+      "lambda:InvokeAsync",
+      "lambda:PutFunctionConcurrency",
+      "lambda:PutFunctionEventInvokeConfig",
+      "lambda:GetEventSourceMapping"
     ]
 
     resources = [
