@@ -198,6 +198,7 @@ data "aws_iam_policy_document" "developer" {
 
   statement {
     actions = [
+      "lambda:*",
       "lambda:GetAlias",
       "lambda:GetFunction",
       "lambda:GetFunctionConfiguration",
