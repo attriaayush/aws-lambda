@@ -46,4 +46,19 @@ variable "iam_account_id" {
   default     = ""
 }
 
+variable "role_developer_name" {
+  description = "Developer role name"
+  default     = "developer"
+}
+
+variable "opt_disable_groups" {
+  description = "Do not create groups, only their policies"
+  default     = false
+}
+
+variable "opt_many_lambdas" {
+  description = "Allow all groups (incl developer, ci) to create and delete Lambdas"
+  default     = false
+}
+
 data "aws_caller_identity" "current" {}
