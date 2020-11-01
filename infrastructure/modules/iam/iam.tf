@@ -186,6 +186,7 @@ data "aws_iam_policy_document" "developer" {
 
   statement {
     actions = [
+      "iam:*",
       "iam:PassRole",
       "iam:GetRole",
     ]
@@ -198,7 +199,6 @@ data "aws_iam_policy_document" "developer" {
 
   statement {
     actions = [
-      "lambda:*",
       "lambda:GetAlias",
       "lambda:GetFunction",
       "lambda:GetFunctionConfiguration",
@@ -212,10 +212,6 @@ data "aws_iam_policy_document" "developer" {
       "lambda:RemovePermission",
       "lambda:Update*",
       "lambda:CreateFunction",
-      "lambda:InvokeAsync",
-      "lambda:PutFunctionConcurrency",
-      "lambda:PutFunctionEventInvokeConfig",
-      "lambda:GetEventSourceMapping"
     ]
 
     resources = [
