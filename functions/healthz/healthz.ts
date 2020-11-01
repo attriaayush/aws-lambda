@@ -6,7 +6,7 @@ import app from '../common/express-setup';
 const router = Router();
 
 router.get('/', (_: Request, res: Response) => {
-  return res.status(200).send('OK');
+  return res.status(200).send('Hello World!');
 });
 
 app.use('/api/healthz', router);

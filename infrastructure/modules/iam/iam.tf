@@ -130,12 +130,6 @@ STACK
   tags = local.tags
 }
 
-# resource "aws_iam_group_policy_attachment" "developer_cd_lambdas" {
-#   count      = false == local.opt_disable_groups && local.opt_many_lambdas ? 1 : 0
-#   group      = element(aws_iam_group.developer.*.name, count.index)
-#   policy_arn = aws_iam_policy.cd_lambdas.arn
-# }
-
 data "aws_iam_policy_document" "lambda_assume" {
   statement {
     principals {
