@@ -1,7 +1,7 @@
 locals {
   account_id               = data.aws_caller_identity.current.account_id
   stage                    = var.stage
-  iam_partition            = var.iam_partition
+  iam_partition            = "aws"
   iam_region               = var.iam_region
   sls_service_name         = var.sls_service_name != "" ? var.sls_service_name : "sls-${var.service_name}"
   tf_service_name          = var.tf_service_name != "" ? var.tf_service_name : "tf-${var.service_name}"
@@ -33,7 +33,6 @@ locals {
   sls_apigw_arn            = "arn:${local.iam_partition}:apigateway:${local.iam_region}::/restapis*"
   sls_apigw_tags_arn       = "arn:${local.iam_partition}:apigateway:${local.iam_region}::/tags*"
   sls_log_stream_arn       = "arn:${local.iam_partition}:logs:${local.iam_region}:${local.iam_account_id}:log-group:/aws/lambda/${local.sls_service_name}-${local.iam_stage}-*:log-stream:"
-
 }
 
 resource "aws_iam_user" "ci_developer" {
@@ -105,31 +104,6 @@ resource "aws_iam_role_policy_attachment" "lambda" {
   policy_arn = aws_iam_policy.lambda.arn
 }
 
-resource "aws_cloudformation_stack" "outputs_lambda_role" {
-  # Only create the stack if we create the default role
-  count = var.lambda_role_name != "" ? 0 : 1
-  name  = "tf-${var.service_name}-${local.stage}-outputs-lambda-role"
-
-  template_body = <<STACK
-Resources:
-  LambdaExecutionRoleArn:
-    Type: AWS::SSM::Parameter
-    Properties:
-      Name: "tf-${var.service_name}-${local.stage}-LambdaExecutionRoleArn"
-      Value: "${aws_iam_role.lambda[count.index].arn}"
-      Type: String
-Outputs:
-  LambdaExecutionRoleArn:
-    Description: "The ARN of the lambda execution role for Serverless to apply"
-    Value: "${aws_iam_role.lambda[count.index].arn}"
-    Export:
-      Name: "tf-${var.service_name}-${local.stage}-LambdaExecutionRoleArn"
-STACK
-
-
-  tags = local.tags
-}
-
 data "aws_iam_policy_document" "lambda_assume" {
   statement {
     principals {
@@ -176,7 +150,6 @@ data "aws_iam_policy_document" "developer" {
       "s3:PutObject",
       "s3:GetObject",
       "s3:ListBucket",
-      "s3:DeleteObject",
     ]
 
     resources = [
@@ -186,9 +159,9 @@ data "aws_iam_policy_document" "developer" {
 
   statement {
     actions = [
-      "iam:*",
-      "iam:PassRole",
       "iam:GetRole",
+      "iam:PassRole",
+      "iam:DeleteRolePolicy"
     ]
 
     resources = [
@@ -253,6 +226,7 @@ data "aws_iam_policy_document" "developer" {
       "logs:DescribeLogGroups",
       "logs:FilterLogEvents",
       "logs:GetLogEvents",
+      "logs:CreateLogGroup"
     ]
 
     resources = [

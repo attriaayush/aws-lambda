@@ -1,20 +1,30 @@
 # Appending sls- to the service name to differentiate
 # resources created by Serverless framework vs Terraform
 
-service: sls-hello-world
+service: sls-${self:custom.service}
+
+custom:
+  service: "hello-world"
+  stage: ${opt:stage, "development"}
+  accountId: 926552379113
 
 provider:
   name: aws
   runtime: nodejs12.x
   region: "eu-west-2"
-  stage: ${opt:stage, "development"}
+  stage: ${self:custom.stage}
+  role: arn:aws:iam::${self:custom.accountId}:role/tf-${self:custom.service}-${self:custom.stage}-lambda-execution
 
 functions:
   healthz:
     handler: ./healthz/healthz.handler
     events:
-      - http: ANY /
-      - http: "ANY {proxy+}"
+      - http: "GET /health/{proxy+}"
+
+  hello-world:
+    handler: ./hello-world/hello-world.handler
+    events:
+      - http: "GET /api/{proxy+}"
 
 # DO not need this plugin since we will be compiling before
 # the deployment step

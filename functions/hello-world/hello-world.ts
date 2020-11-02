@@ -5,11 +5,10 @@ import app from '../common/express-setup';
 
 const router = Router();
 
-router.get('/healthz', (_: Request, res: Response) => {
-  console.log("the health endpoint")
-  return res.status(200).send('Hey I am healthy!!!');
+router.get('/hello-world', (_: Request, res: Response) => {
+  console.log("is this being hit")
+  return res.status(200).send('Hello World!');
 });
 
-app.use('/health', router);
+app.use('/api', router);
 module.exports.handler = serverless(app);
-
