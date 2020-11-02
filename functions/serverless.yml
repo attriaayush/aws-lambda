@@ -13,6 +13,7 @@ provider:
   runtime: nodejs12.x
   region: "eu-west-2"
   stage: ${self:custom.stage}
+  shouldStartNameWithService: true
   role: arn:aws:iam::${self:custom.accountId}:role/tf-${self:custom.service}-${self:custom.stage}-lambda-execution
 
 functions:
