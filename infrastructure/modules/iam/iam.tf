@@ -36,7 +36,7 @@ locals {
 }
 
 resource "aws_iam_user" "ci_developer" {
-  name = "tf-ci-developer"
+  name = "tf-ci-${var.stage}-developer"
   path = "/"
 
   tags = {
