@@ -135,6 +135,7 @@ data "aws_iam_policy_document" "developer" {
       "cloudformation:ListStackResources",
       "cloudformation:Get*",
       "cloudformation:UpdateStack",
+      "cloudformation:CreateStack",
       "cloudformation:DescribeStacks",
     ]
 
