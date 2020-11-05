@@ -7,6 +7,8 @@ custom:
   service: "hello-world"
   stage: ${opt:stage, "development"}
   accountId: 926552379113
+  apiGateway:
+    shouldStartNameWithService: true
 
 provider:
   name: aws
