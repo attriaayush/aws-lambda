@@ -135,7 +135,6 @@ data "aws_iam_policy_document" "developer" {
       "cloudformation:ListStackResources",
       "cloudformation:Get*",
       "cloudformation:UpdateStack",
-      "cloudformation:CreateStack",
       "cloudformation:DescribeStacks",
     ]
 
@@ -151,9 +150,6 @@ data "aws_iam_policy_document" "developer" {
       "s3:PutObject",
       "s3:GetObject",
       "s3:ListBucket",
-      "s3:CreateBucket",
-      "s3:DeleteBucket",
-      "s3:SetBucketEncryption"
     ]
 
     resources = [
