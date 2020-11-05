@@ -16,14 +16,14 @@ jobs:
         uses: hashicorp/setup-terraform@v1
       - name: Terraform Init
         id: init
-        working-directory: infrastructure
+        working-directory: infrastructure/production
         run: terraform init
           -var stage="development"
           -backend-config="access_key=${{ secrets.AWS_ACCESS_KEY_ID }}"
           -backend-config="secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}"
       - name: Terraform Apply
         if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-        working-directory: infrastructure
+        working-directory: infrastructure/production
         run: terraform apply -auto-approve
           -var stage="development"
           -var "aws_access_key=${{ secrets.AWS_ACCESS_KEY_ID }}"
