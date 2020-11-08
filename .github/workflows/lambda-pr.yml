@@ -66,7 +66,7 @@ jobs:
           -var "aws_secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}"
       - name: Deploy Cloud Functions
         working-directory: functions
-        run: npm i && npx serverless deploy -s branch-deploy-${{ steps.config.outputs.branch_slug }}
+        run: npm i && npx serverless deploy -s branch-deploy-${GITHUB_REF_NAME_SLUG}
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
