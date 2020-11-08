@@ -16,7 +16,7 @@ provider:
   region: "eu-west-2"
   stage: ${self:custom.stage}
   shouldStartNameWithService: true
-  role: arn:aws:iam::${self:custom.accountId}:role/tf-${self:custom.service}-${self:custom.stage}-lambda-execution
+  role: arn:aws:iam::${self:custom.accountId}:role/tf-${self:custom.service}-development-lambda-execution
 
 functions:
   healthz:
@@ -29,7 +29,5 @@ functions:
     events:
       - http: "GET /api/{proxy+}"
 
-# DO not need this plugin since we will be compiling before
-# the deployment step
 plugins:
   - serverless-plugin-typescript
