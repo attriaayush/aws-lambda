@@ -12,10 +12,10 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "serverless-http": "^2.6.0",
-    "serverless-offline": "^6.9.0",
-    "serverless-plugin-typescript": "^1.1.9",
+    "serverless-offline": "^10.2.1",
+    "serverless-plugin-typescript": "^2.0.0",
     "typescript": "^4.7.4"
   }
 }
