@@ -13,7 +13,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "serverless-http": "^2.6.0",
-    "serverless-offline": "^6.9.0",
+    "serverless-offline": "^10.2.1",
     "typescript": "^4.7.4"
   }
 }
